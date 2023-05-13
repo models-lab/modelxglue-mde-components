@@ -1,0 +1,10 @@
+reference: "$COMPONENTS/classification/svm/model.yaml"
+ml_model: "SVM"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF, GloVe]
+hyperparameters:
+  kernel: ["rbf", "linear"]
+  C : [0.01, 0.1, 1, 10, 100]
+

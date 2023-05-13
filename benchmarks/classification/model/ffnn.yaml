@@ -1,0 +1,10 @@
+reference: "$COMPONENTS/classification/ffnn/model.yaml"
+ml_model: "FFNN"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF, GloVe]
+
+hyperparameters:
+  hidden_layer_sizes : [[50], [100], [150], [200]]
+

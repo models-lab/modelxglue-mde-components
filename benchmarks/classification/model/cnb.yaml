@@ -1,0 +1,7 @@
+reference: "$COMPONENTS/classification/cnb/model.yaml"
+ml_model: "CNB"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF]
+

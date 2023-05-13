@@ -1,0 +1,5 @@
+task_name: "clustering"
+evaluation_strategy: "sampling"
+metric: "v_measure_score"
+resampling: 10
+size_dataset: 0.7

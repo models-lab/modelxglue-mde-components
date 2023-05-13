@@ -1,0 +1,20 @@
+name: Model classification with Scikit-Learn models (SVM)
+task: classification
+model: SVM-Kernel
+
+dataset:
+  format: graph
+
+transform:
+  - type: kernel
+    column: graph
+
+hyper:
+  kernel: "The kernel used"
+  C : "Regularization parameter"
+
+# This part explains which is the execution mechanism of this model
+environment:
+  python: venv
+  train: model.py --stage train --root {root} --input {input} --target {target} --hyper {hyper}
+  test:  model.py --stage test  --root {root} --input {input}

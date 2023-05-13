@@ -1,0 +1,31 @@
+name: Recommendation with Memorec
+task: recommendation
+model: Memorec
+
+# This model requires the dataset in XMI format dumped to disk
+dataset:
+  format: xmi
+
+transform:
+  - type: composite
+    only: train
+    steps:
+      - type: docker
+        folder: filter-dataset/
+        run: java -cp /java/target/filter-dataset-1.0-SNAPSHOT-jar-with-dependencies.jar org.ml2.Main -r {root} -maxpkg 1 -minclasses 2 -maxclasses 15
+      - type: xmi-dump
+  - type: composite
+    only: test
+    steps:
+      - type: docker
+        folder: filter-dataset/
+        run: java -cp /java/target/filter-dataset-1.0-SNAPSHOT-jar-with-dependencies.jar org.ml2.Main -r {root} -maxpkg 1 -minclasses 2 -maxclasses 15
+      - type: docker
+        folder: prepare-test-set/
+        run: java -cp /java/target/TestSetExtractor-1.0-SNAPSHOT-jar-with-dependencies.jar org.ml2.Main -r {root} -t attribute
+      - type: xmi-dump
+
+environment:
+  docker: Dockerfile
+  train: scripts/extract.sh {root} {task} train
+  test: scripts/recommend.sh {root} {task} query

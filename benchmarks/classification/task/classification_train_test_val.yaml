@@ -1,0 +1,6 @@
+task_name: "classification"
+evaluation_strategy: "train_test_val"
+metric: ["balanced_accuracy_score", "accuracy_score"]
+train_split: 0.7
+test_split: 0.2
+val_split: 0.1

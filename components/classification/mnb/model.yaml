@@ -1,0 +1,19 @@
+name: Model classification with Scikit-Learn models (MNB)
+task: classification
+model: MNB
+parameters:
+  encoding: [TFIDF]
+
+dataset:
+  format: txt
+
+transform:
+  - type: vectorize-text
+    strategy: ${args.encoding:tfidf}
+    columns: [txt]
+    separator: '\n'
+
+environment:
+  python: venv
+  train: model.py --stage train --root {root} --input {input} --target {target} --hyper {hyper}
+  test:  model.py --stage test  --root {root} --input {input}

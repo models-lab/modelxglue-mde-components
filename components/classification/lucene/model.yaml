@@ -1,0 +1,23 @@
+name: Model classification with LUCENE and KNN
+task: classification
+model: LUCENE-KNN
+
+# We describe the things that this model supports
+dataset:
+  format: xmi
+hyper:
+  k: "k"
+
+transform:
+  - type: xmi-dump
+    only: train
+  - type: xmi-dump
+    only: test
+
+# This part explains which is the execution mechanism of this model
+environment:
+  docker: Dockerfile
+  train: java -cp /scripts/lucene/target/lucene-classification-0.0.1-SNAPSHOT-jar-with-dependencies.jar lucene.Main {root} train {hyper}
+  test: java -cp /scripts/lucene/target/lucene-classification-0.0.1-SNAPSHOT-jar-with-dependencies.jar lucene.Main {root} test {hyper}
+
+  # Perhaps explain here how to invoke the docker

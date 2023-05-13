@@ -1,0 +1,6 @@
+reference: "$COMPONENTS/clustering/samos/model.yaml"
+ml_model: "SAMOS"
+encoding_features: "XMI"
+hyperparameters:
+  n_clusters: [ 'compute' ] # This means that the clustering task will automatically compute the best number of clusters
+  

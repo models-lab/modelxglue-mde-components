@@ -1,0 +1,10 @@
+reference: "$COMPONENTS/clustering/agglomerative/model.yaml"
+ml_model: "AGGLOMERATIVE"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF, GloVe]
+hyperparameters:
+  n_clusters: [ 'compute' ] # This means that the clustering task will automatically compute the best number of clusters
+#  metric: ["cosine"]
+  linkage: ["complete"]

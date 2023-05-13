@@ -1,0 +1,4 @@
+ml_model: "KNN"
+encoding_features: "TFIDF"
+hyperparameters:
+  n_neighbors : [1,2,3,4,5]

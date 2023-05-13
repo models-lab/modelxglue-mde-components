@@ -1,0 +1,27 @@
+{
+    repositories: {
+    	"repo-experiment-ecore" : {
+	    type: "ecore",
+	    origin: "github",	    
+	    repo_root  : "$(EXPERIMENT_ROOT)/data/modelset/raw-data",
+	    crawler_db : "$(EXPERIMENT_ROOT)/tmp/ecore/crawler.db",
+	    model_db   : "$(EXPERIMENT_ROOT)/tmp/ecore/analysis.db",
+            
+	    graph_length : 3,
+	    graph_filter: EcoreFilter,
+	    graph_factory: EcoreFactory
+	},
+	"repo-experiment-uml" : {
+	    type: "uml",
+	    origin: "genmymodel",	    
+	    repo_root  : "$(EXPERIMENT_ROOT)/data/modelset/raw-data",
+	    crawler_db : "$(EXPERIMENT_ROOT)/tmp/uml/crawler.db",
+	    model_db   : "$(EXPERIMENT_ROOT)/tmp/uml/analysis.db",
+            
+            model_loader: UML,
+            graph_factory: WSandCCTokenizerSWStemming,
+	    graph_filter: UMLFilter,
+            graph_length : 3
+	}
+    }
+}

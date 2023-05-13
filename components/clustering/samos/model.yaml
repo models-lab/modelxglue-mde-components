@@ -1,0 +1,15 @@
+name: Model clustering with SAMOS
+task: clustering
+model: SAMOS
+hyper:
+  n_clusters: "n_clusters"
+
+dataset:
+  format: xmi
+
+transform:
+  - type: xmi-dump
+
+environment:
+  docker: Dockerfile
+  build: "conda run --no-capture-output -n r_env java -Djava.library.path=/opt/conda/envs/r_env/lib/R/library/rJava/jri -Xss16m -Xmx1024m -cp /scripts/SCICO-D-21-00209/target/samos-1.0.0-RELEASE-jar-with-dependencies.jar:/scripts/SCICO-D-21-00209/lib/JRI.jar:/scripts/SCICO-D-21-00209/lib/apted-master.jar:/scripts/SCICO-D-21-00209/lib/edu.mit.jwi_2.4.0.jar:/scripts/SCICO-D-21-00209/lib/apted-master.jar:/scripts/SCICO-D-21-00209/lib/intt.jar:/scripts/SCICO-D-21-00209/lib/json-20170516.jar:/scripts/SCICO-D-21-00209/lib/ws4j-1.0.1.jar nl.tue.set.samos.main.SAMOSRunner {root} {hyper}"

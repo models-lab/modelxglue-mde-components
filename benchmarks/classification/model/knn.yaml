@@ -1,0 +1,10 @@
+reference: "$COMPONENTS/classification/knn/model.yaml"
+ml_model: "KNN"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF, GloVe]
+hyperparameters:
+  n_neighbors : [1,2,3,4,5]
+
+

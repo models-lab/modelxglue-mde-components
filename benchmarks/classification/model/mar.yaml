@@ -1,0 +1,5 @@
+reference: "$COMPONENTS/classification/mar/model.yaml"
+ml_model: "MAR"
+encoding_features: "XMI"
+hyperparameters:
+  length: [2, 3]

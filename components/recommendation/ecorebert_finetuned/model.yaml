@@ -1,0 +1,33 @@
+name: Recommendation with EcoreBERT
+task: recommendation
+model: EcoreBERT-fine-tuned
+
+# This model requires the dataset in XMI format dumped to disk
+dataset:
+  format: xmi
+
+transform:
+  - type: composite
+    steps:
+      - type: docker
+        folder: filter-dataset/
+        run: java -cp /java/target/filter-dataset-1.0-SNAPSHOT-jar-with-dependencies.jar org.ml2.Main -r {root} -maxpkg 1 -minclasses 2 -maxclasses 15
+      - type: docker
+        folder: prepare-test-set/
+        run: java -cp /java/target/TestSetExtractor-1.0-SNAPSHOT-jar-with-dependencies.jar org.ml2.Main -r {root} -t attribute
+      - type: xmi-dump
+      - type: docker
+        folder: model-to-tree/
+        run: '/bin/bash -c "java -cp /scripts/ecore-to-tree/target/ecore-to-code-1.0.0-jar-with-dependencies.jar ecore2text.TreeTransformation {root};python /scripts/transform.py --root {root}"'
+
+hyper:
+  dummy: "Just to have something here"
+
+# This part explains which is the execution mechanism of this model
+environment:
+  python: venv
+  more_files: ['inference.py']
+  train: model.py --stage train --root {root} --input {input} --hyper {hyper} --original {original}
+  test:  model.py --stage test  --root {root} --input {input} --original {original}
+
+  # Perhaps explain here how to invoke the docker

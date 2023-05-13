@@ -1,0 +1,9 @@
+reference: "$COMPONENTS/classification/mnb/model.yaml"
+ml_model: "MNB"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF, GloVe]
+
+hyperparameters:
+  alpha: [0.1, 0.6, 1.1, 1.6]

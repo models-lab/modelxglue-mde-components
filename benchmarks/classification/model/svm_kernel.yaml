@@ -1,0 +1,7 @@
+reference: "$COMPONENTS/classification/svm_kernel/model.yaml"
+ml_model: "SVM"
+encoding_features: KERNEL
+hyperparameters:
+  kernel: ["precomputed"]
+  C : [0.01, 0.1, 1, 10, 100]
+

@@ -1,0 +1,15 @@
+name: Model classification with MAR and KNN
+task: classification
+model: MAR-KNN
+
+# We describe the things that this model supports
+dataset:
+  format: xmi
+hyper:
+  length: "Path length"
+
+# This part explains which is the execution mechanism of this model
+environment:
+  docker: Dockerfile
+  train: jruby-9.4.1.0/bin/jruby code/fit.rb {root} {task} train
+  test: jruby-9.4.1.0/bin/jruby code/fit.rb {root} {task} predict

@@ -1,0 +1,18 @@
+name: Model clustering with Scikit-Learn models (KMeans)
+task: clustering
+model: KMeans
+parameters:
+  encoding: [TFIDF, GloVe]
+
+dataset:
+  format: txt
+
+transform:
+  - type: vectorize-text
+    strategy: ${args.encoding:tfidf}
+    columns: [txt]
+    separator: '\n'
+
+environment:
+  python: venv
+  build: model.py --root {root} --input {input} --hyper {hyper}

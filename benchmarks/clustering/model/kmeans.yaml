@@ -1,0 +1,13 @@
+reference: "$COMPONENTS/clustering/kmeans/model.yaml"
+ml_model: "KMEANS"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF, GloVe]
+hyperparameters:
+  n_clusters : ['compute'] # This means that the clustering task will automatically compute the best number of clusters
+
+# This would be a nice feature to have, but it's not implemented yet
+#hyperparameters_compute:
+#  type: venv
+#  compute: clustering_hyper.py --root {root} --input {input} --hyper {hyper}

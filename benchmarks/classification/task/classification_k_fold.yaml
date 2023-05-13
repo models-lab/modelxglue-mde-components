@@ -1,0 +1,4 @@
+task_name: "classification"
+evaluation_strategy: "k_fold"
+folds: 10
+metric: ["balanced_accuracy_score", "accuracy_score"]

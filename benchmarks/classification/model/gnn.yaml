@@ -1,0 +1,7 @@
+reference: "$COMPONENTS/classification/gnn/model.yaml"
+ml_model: "GNN"
+encoding_features: "GRAPH"
+hyperparameters:
+  embedding_size : [256]
+# The original paper only used 256
+#  embedding_size : [128, 256, 512]

@@ -1,0 +1,7 @@
+reference: "$COMPONENTS/classification/gnb/model.yaml"
+ml_model: "GNB"
+encoding_features: ${args.encoding:tfidf}
+parameters:
+  combine: [encoding]
+  encoding: [TFIDF]
+
