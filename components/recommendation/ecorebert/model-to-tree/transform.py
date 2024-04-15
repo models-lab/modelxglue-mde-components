@@ -44,12 +44,19 @@ def transform(data, owner, what='attr'):
 
 
 def main(args):
-    print("Running second preprecessing")
+    print("Running second preprocessing")
     with open(os.path.join(args.root, args.file), "r") as f:
         as_json = json.load(f)
+        
     for data in as_json:
-        data['tree-attr'] = transform(json.loads(data['tree']), data['owner'], 'attr')
-        data['tree-assoc'] = transform(json.loads(data['tree']), data['owner'], 'assoc')
+        try:
+            tree = json.loads(data['tree'])
+            data['tree-attr'] = transform(tree, data['owner'], 'attr')
+            data['tree-assoc'] = transform(tree, data['owner'], 'assoc')
+        except:
+            print("Error processing: ")
+            print(data['tree'])
+
     with open(os.path.join(args.root, args.file), "w") as f:
         json.dump(as_json, f)
 

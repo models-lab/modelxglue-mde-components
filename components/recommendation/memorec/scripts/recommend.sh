@@ -12,8 +12,10 @@ json=$(cat "$SHARED/X.json")
 # Generate a newline-separated list of objects
 obj_list=$(echo "${json}" | jq -c '.[]')
 
+rm $SHARED/y_pred.json
 echo -e "[\n" > $SHARED/y_pred.json
 SEPARATOR=""
+
 # Loop through each object in the list
 while IFS= read -r obj; do
     # Extract the values of the ids and xmi_path fields
@@ -47,7 +49,7 @@ while IFS= read -r obj; do
       # Construct a JSON list with the recommendations with jq
       #recs=$(cat $SHARED/recommendations.txt | jq -R -s -c 'split("\n")[:-1]')
       recs=$(cat $SHARED/recommendations.txt | jq -r '.Results[] | keys | .[]'  | head -n 5 | jq -R -c -s 'split("\n")[:-1]')
-      echo "Adding to y_pred.json: $recs"
+      echo "Adding to y_pred.json: ||$recs||"
       echo $SEPARATOR >> $SHARED/y_pred.json
       echo $recs >> $SHARED/y_pred.json
     else
@@ -56,8 +58,10 @@ while IFS= read -r obj; do
     fi
 
     SEPARATOR=","
-#
+
+#    echo "START y_pred.json"
 #    cat $SHARED/y_pred.json
+#    echo "END y_pred.json"
 done <<< "${obj_list}"
 echo "Finished processing all objects"
 echo -e "\n]\n" >> $SHARED/y_pred.json

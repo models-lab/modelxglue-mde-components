@@ -27,10 +27,16 @@ public class TreeTransformation {
 		for (JsonNode jsonNode : list) {
 			String xmiPath = jsonNode.get("xmi_path").textValue();
 			xmiPath = root + File.separator + xmiPath;
-			String jsonResult = new EcoreToTextTransformation().generate(xmiPath);
-			result.add(new TestElement(jsonNode.get("ids").textValue(),
-					jsonNode.get("owner").textValue(), 
-					jsonNode.get("target").textValue(), jsonResult));
+			try {
+				String id = jsonNode.get("ids").textValue();
+				System.out.println("Generating for id " + id + " at " + xmiPath);
+				String jsonResult = new EcoreToTextTransformation().generate(xmiPath);
+				result.add(new TestElement(id,
+						jsonNode.get("owner").textValue(), 
+						jsonNode.get("target").textValue(), jsonResult));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		objectMapper.writer().writeValue(new FileWriter(transformFile), result);
 	}
