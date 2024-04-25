@@ -5,9 +5,18 @@ sys.path.append(os.path.dirname(__file__))
 from utils.model_io import ModelInOut, execute_model, ModelImplementation
 from GNN import GNNClassifier
 
+def set_seed(seed: int):
+    import random
+    import numpy as np
+    import torch
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
 
 class Model(ModelImplementation):
     def train(self, X, y, inout: ModelInOut):
+        set_seed(inout.seed)
         model = GNNClassifier(**inout.hyper)
         model.fit(X['graph'], y)
         return model
