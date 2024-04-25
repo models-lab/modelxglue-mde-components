@@ -1,5 +1,5 @@
-reference: "$COMPONENTS/classification/gnn/model.yaml"
-ml_model: "GNN"
+reference: "$COMPONENTS/classification/gnn-embedding/model.yaml"
+ml_model: "GNN_EMBEDDING"
 encoding_features: "GRAPH"
 hyperparameters:
   embedding_size : [300]

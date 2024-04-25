@@ -1,0 +1,15 @@
+name: Model classification with GNN and PyTorch-Geometric
+task: classification
+model: GNN_EMBEDDING
+
+dataset:
+  format: graph
+hyper:
+  embedding_size: "Size of the embedding. Tested with 256."
+
+environment:
+  python: venv
+  more_files: ['GNN.py']
+  more_requirements: torch.txt
+  train: model.py --stage train --root {root} --input {input} --target {target} --hyper {hyper}
+  test:  model.py --stage test  --root {root} --input {input}
