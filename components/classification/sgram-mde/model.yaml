@@ -1,0 +1,29 @@
+name: Model classification with Embeddings trained on MDE Corpus
+task: classification
+model: sgram-mde
+
+parameters:
+  encoding: [GloVe]
+
+dataset:
+  format: txt
+
+transform:
+  - type: vectorize-text
+    strategy: ${args.encoding:glove}
+    columns: [txt]
+    embedding_type: word2vec
+    embedding_model: CarlosUM/embeddings
+    embedding_file: "sgram-mde.kv"
+    separator: newline
+
+# This part explains which is the execution mechanism of this model
+environment:
+  python: venv
+  train: model.py --stage train --root {root} --input {input} --target {target} --hyper {hyper}
+  test:  model.py --stage test  --root {root} --input {input}
+
+hyper:
+  kernel: "The kernel used"
+  C : "Regularization parameter"
+

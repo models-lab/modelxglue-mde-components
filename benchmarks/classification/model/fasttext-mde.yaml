@@ -1,0 +1,9 @@
+reference: "$COMPONENTS/classification/fasttext-mde/model.yaml"
+ml_model: "fasttext-mde"
+encoding_features: ${args.encoding:glove}
+parameters:
+  combine: [encoding]
+  encoding: [GloVe]
+hyperparameters:
+  kernel: ["rbf"]
+  C : [0.01, 0.1, 1, 10, 100]

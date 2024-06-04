@@ -1,0 +1,29 @@
+name: Model classification with Embeddings trained on MDE Corpus and FastText technique.
+task: classification
+model: fasttext-mde
+
+parameters:
+  encoding: [GloVe]
+
+dataset:
+  format: txt
+
+transform:
+  - type: vectorize-text
+    strategy: ${args.encoding:glove}
+    columns: [txt]
+    embedding_type: fasttext
+    embedding_model: CarlosUM/embeddings
+    embedding_file: "fasttext-mde.bin"
+    separator: newline
+
+# This part explains which is the execution mechanism of this model
+environment:
+  python: venv
+  train: model.py --stage train --root {root} --input {input} --target {target} --hyper {hyper}
+  test:  model.py --stage test  --root {root} --input {input}
+
+hyper:
+  kernel: "The kernel used"
+  C : "Regularization parameter"
+
